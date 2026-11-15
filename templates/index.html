@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BMTC Live – Bengaluru Bus Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">B</span><div><strong>BMTC Live</strong><small>Bengaluru bus information</small></div></div>
+  <span class="live-pill"><i></i> LIVE DATA WHEN AVAILABLE</span>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">MOVE AROUND BENGALURU</p>
+      <h1>Your bus. Your route.<br><span>Less waiting.</span></h1>
+      <p class="sub">Search BMTC routes, follow available GPS vehicles and check stop-wise arrival estimates.</p>
+    </div>
+    <div class="hero-note"><b>Important</b><span>Live data depends on BMTC service availability. Ticket checkout is demo-only until BMTC authorizes ticket issuance.</span></div>
+  </section>
+
+  <section class="grid">
+    <div class="panel search-panel">
+      <div class="tabs"><button class="tab active" data-tab="route">Find a route</button><button class="tab" data-tab="vehicle">Track a bus</button></div>
+      <div id="routePane">
+        <label for="routeSearch">BMTC route number</label>
+        <div class="input-row"><input id="routeSearch" placeholder="e.g. 335, 500,  ಕೆಂಪೇಗೌಡ..." autocomplete="off"><button id="routeSearchBtn">Search</button></div>
+        <div id="routeResults" class="results"></div>
+      </div>
+      <div id="vehiclePane" hidden>
+        <label for="vehicleSearch">Bus registration number</label>
+        <div class="input-row"><input id="vehicleSearch" placeholder="Enter part of bus number"><button id="vehicleSearchBtn">Find bus</button></div>
+        <div id="vehicleResults" class="results"></div>
+      </div>
+      <div id="status" class="status" role="status">Search a route or bus to begin.</div>
+      <div class="divider"></div>
+      <div class="selected-head"><div><p class="eyebrow">SELECTED SERVICE</p><h2 id="selectedTitle">No route selected</h2></div><span id="refreshLabel" class="muted"></span></div>
+      <div id="busList" class="bus-list empty">Choose a route to see buses currently reporting GPS.</div>
+    </div>
+
+    <div class="panel map-panel">
+      <div class="map-heading"><div><p class="eyebrow">BENGALURU</p><h2>Live map</h2></div><div class="map-actions"><span class="map-key"><i></i> Bus location</span><button id="refreshBtn" class="refresh-btn">Refresh</button></div></div>
+      <div id="map"></div>
+      <p class="map-foot">Map tiles © OpenStreetMap contributors. Vehicle positions are shown only when returned by the upstream service.</p>
+    </div>
+  </section>
+
+  <section class="panel ticket-panel">
+    <div class="ticket-intro"><p class="eyebrow">FARE LOOKUP</p><h2>Plan your ticket</h2><p>Choose actual stop records from BMTC stop search to request a fare quote.</p></div>
+    <div class="ticket-fields">
+      <div><label for="fromStop">From stop</label><input id="fromStop" placeholder="Search boarding stop"><div id="fromResults" class="results compact"></div></div>
+      <div><label for="toStop">To stop</label><input id="toStop" placeholder="Search destination stop"><div id="toResults" class="results compact"></div></div>
+      <button id="fareBtn" class="fare-btn">Find fare</button>
+    </div>
+    <div id="fareResults" class="fare-results"></div>
+    <div id="demoCheckout" class="demo-checkout" hidden>
+      <div class="demo-warning">DEMO ONLY — this does not purchase a BMTC ticket and must not be used for travel.</div>
+      <label for="passengerName">Passenger name</label>
+      <input id="passengerName" placeholder="Your name">
+      <button id="demoTicketBtn">Create demo QR receipt</button>
+      <div id="ticketResult"></div>
+    </div>
+  </section>
+
+  <footer><span>Independent community prototype · Not affiliated with BMTC</span><span><a href="https://play.google.com/store/apps/details?id=com.bmtc.bmtcavls.two" target="_blank" rel="noopener">Official Namma BMTC 2.0 app</a></span></footer>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+ integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
